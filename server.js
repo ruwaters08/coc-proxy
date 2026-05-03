@@ -2,6 +2,12 @@ const express = require('express');
 const fetch = require('node-fetch');
 const app = express();
 
+app.get('/ip', async (req, res) => {
+  const response = await fetch('https://api4.ipify.org?format=json');
+  const data = await response.json();
+  res.json(data);
+});
+
 app.use(async (req, res) => {
   try {
     const cocUrl = 'https://api.clashofclans.com' + req.path + (req.url.includes('?') ? '?' + req.url.split('?')[1] : '');
